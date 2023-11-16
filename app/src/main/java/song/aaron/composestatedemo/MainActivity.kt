@@ -39,14 +39,14 @@ fun DemoScreen() {
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MyTextField() {
-    var textState = remember { mutableStateOf("") }
+    var textState by remember { mutableStateOf("") }
 
     val onTextChange = { text: String ->
-        textState.value = text
+        textState = text
     }
 
     TextField(
-        value = textState.value,
+        value = textState,
         onValueChange = onTextChange
     )
 }
