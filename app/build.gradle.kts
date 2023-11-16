@@ -5,7 +5,7 @@ plugins {
 
 android {
     namespace = "song.aaron.composestatedemo"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "song.aaron.composestatedemo"
