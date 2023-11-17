@@ -3,10 +3,12 @@ package song.aaron.composestatedemo
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
+import androidx.compose.material3.Switch
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -53,10 +55,45 @@ fun MyTextField() {
     )
 }
 
+//@Preview(showBackground = true)
+//@Composable
+//fun DefaultPreview() {
+//    ComposeStateDemoTheme {
+//        DemoScreen()
+//    }
+//}
+
+/**
+ * 단방향 데이터 흐름(UDF: Unidirectional Data Flow)
+ */
+@Composable
+fun FunctionA() {
+    var switchState by remember {
+        mutableStateOf(true)
+    }
+
+    val onSwitchChange = { value: Boolean ->
+        switchState = value
+    }
+
+    FunctionB(switchState = switchState, onSwitchChange = onSwitchChange)
+}
+
+@Composable
+fun FunctionB(switchState: Boolean, onSwitchChange: (Boolean) -> Unit) {
+    Switch(
+        checked = switchState,
+        onCheckedChange = onSwitchChange
+    )
+}
+
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview() {
     ComposeStateDemoTheme {
-        DemoScreen()
+        Column {
+            DemoScreen()
+            FunctionA()
+        }
     }
 }
